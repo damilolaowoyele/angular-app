@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+/* Apply padding to the body element */
+body {
+  padding-bottom: 200px; /* Adjust the value as needed */
+}
+
+/* Alternatively, apply margin to the main container */
+.main-container {
+  margin-bottom: 20px; /* Adjust the value as needed */
+}

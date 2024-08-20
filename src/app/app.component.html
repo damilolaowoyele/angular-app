@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a
+      class="navbar-brand"
+      routerLink="users"
+      (click)="redirectToUserList()"
+      href="javascript:void(0)"
+    >
+      <img src="assets/fhi360-logo.webp" alt="FHI360 Logo" height="60" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link btn btn-primary text-white me-2"
+            routerLinkActive="active"
+            routerLink="users"
+          >
+            <i class="bi bi-people-fill me-1"></i> Consultant List
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn btn-success text-white me-2"
+            routerLinkActive="active"
+            routerLink="create-user"
+          >
+            <i class="bi bi-person-plus-fill me-1"></i> Create Consultant
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link btn text-white"
+            routerLinkActive="active"
+            routerLink="payment-detail"
+            style="background-color: #f44336"
+          >
+            <i class="bi bi-credit-card-fill me-1"></i> Payment Schedule
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>

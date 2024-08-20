@@ -1,0 +1,293 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Consultants</h2>
+
+  <!-- Search and Filter Form -->
+  <div class="row mb-4">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <form (ngSubmit)="onSearch()" class="mb-4">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control py-2 px-4 search-input"
+            placeholder="Search consultants..."
+            [(ngModel)]="searchText"
+            name="searchText"
+          />
+          <button class="btn btn-primary search-button" type="submit">
+            <i class="bi bi-search"></i> Search
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <select
+              class="form-select"
+              [(ngModel)]="selectedState"
+              name="state"
+              (change)="onStateChange()"
+            >
+              <option value="">Select State</option>
+              <option *ngFor="let state of states" [value]="state.state">
+                {{ state.state }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <select
+              class="form-select"
+              [(ngModel)]="selectedLga"
+              name="lga"
+              (change)="onLgaChange()"
+            >
+              <option value="">Select LGA</option>
+              <option *ngFor="let lga of lgas" [value]="lga">{{ lga }}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <select
+              class="form-select"
+              [(ngModel)]="selectedFacility"
+              name="lga"
+              (change)="onFacilityChange()"
+            >
+              <option value="">Select Facility</option>
+              <option *ngFor="let facility of facilities" [value]="facility">
+                {{ facility }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <select
+              class="form-select"
+              [(ngModel)]="selectedStatus"
+              name="status"
+              (change)="onFilter()"
+            >
+              <option value="">Select Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Duplicates">Duplicates</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="users.length; else noUsers">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            class="table table-hover table-bordered table-fixed table-responsive-stack"
+          >
+            <thead class="table-primary table-header-prominent">
+              <tr>
+                <th class="col-consultant-info">Consultant Info</th>
+                <th class="col-location">Location</th>
+                <th class="col-contact">Contact</th>
+                <th class="col-status">Status</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td data-label="Consultant Info" class="col-consultant-info">
+                  <div class="text-container">
+                    <strong>{{ user.firstName }} {{ user.lastName }}</strong
+                    ><br />
+                    <small class="text-muted"
+                      >{{ user.designation }} | {{ user.qualification }}</small
+                    >
+                    <div class="tooltip-content">
+                      <strong>{{ user.firstName }} {{ user.lastName }}</strong
+                      ><br />
+                      {{ user.designation }} | {{ user.qualification }}
+                    </div>
+                  </div>
+                </td>
+                <td data-label="Location" class="col-location">
+                  <div class="tooltip-container">
+                    <span class="d-block">State: {{ user.state }}</span>
+                    <span class="d-block">Cluster: {{ user.cluster }}</span>
+                    <span class="d-block">LGA: {{ user.lga }}</span>
+                    <span class="d-block">Facility: {{ user.facility }}</span>
+                    <span class="d-block">Team: {{ user.team }}</span>
+                    <div class="tooltip-content">
+                      State: {{ user.state }}<br />
+                      Cluster: {{ user.cluster }}<br />
+                      LGA: {{ user.lga }}<br />
+                      Facility: {{ user.facility }}<br />
+                      Team: {{ user.team }}
+                    </div>
+                  </div>
+                </td>
+                <td data-label="Contact" class="col-contact">
+                  <div class="tooltip-container">
+                    <span class="d-block"
+                      ><i class="bi bi-phone"></i> {{ user.phoneNumber }}</span
+                    >
+                    <span class="d-block"
+                      ><i class="bi bi-telephone"></i>
+                      {{ user.internetPhoneNumber }}</span
+                    >
+                    <span class="d-block"
+                      ><i class="bi bi-envelope"></i>
+                      {{ user.emailAddress }}</span
+                    >
+                    <div class="tooltip-content">
+                      Phone: {{ user.phoneNumber }}<br />
+                      Internet Phone: {{ user.internetPhoneNumber }}<br />
+                      Email: {{ user.emailAddress }}
+                    </div>
+                  </div>
+                </td>
+
+                <!-- With Duplicate -->
+                <td data-label="Status" class="col-status">
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-success': user.status === 'Active',
+                      'bg-danger': user.status === 'Inactive',
+                      'bg-warning': user.suspectedDuplicate
+                    }"
+                  >
+                    <i
+                      class="bi"
+                      [ngClass]="{
+                        'bi-check-circle-fill': user.status === 'Active',
+                        'bi-x-circle-fill': user.status === 'Inactive',
+                        'bi-exclamation-triangle-fill': user.suspectedDuplicate
+                      }"
+                    ></i>
+                    {{ user.status }}
+                    <span *ngIf="user.suspectedDuplicate">(Duplicate)</span>
+                  </span>
+                </td>
+
+                <td data-label="Actions" class="col-actions">
+                  <div class="btn-group" role="group">
+                    <button
+                      (click)="updateUser(user.id)"
+                      class="btn btn-sm btn-outline-primary"
+                    >
+                      <i class="bi bi-card-text"></i> View
+                    </button>
+                    <!-- <button
+                      (click)="deleteUser(user.id)"
+                      class="btn btn-sm btn-outline-danger"
+                      style="margin-left: 5px"
+                    >
+                      <i class="bi bi-trash"></i> Delete
+                    </button> -->
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-auto text-center mb-3 mb-md-0">
+        <label for="pageSizeSelect" class="form-label me-2"
+          >Items per page:</label
+        >
+        <select
+          id="pageSizeSelect"
+          class="form-select d-inline w-auto"
+          [(ngModel)]="pageSize"
+          (change)="onPageSizeChange()"
+        >
+          <option *ngFor="let size of pageSizes" [value]="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-auto">
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 0">
+              <a
+                class="page-link"
+                href="javascript:void(0)"
+                (click)="onPageChange(currentPage - 1)"
+                aria-label="Previous"
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            <!-- Show the first page button if not on the first page -->
+            <li *ngIf="shouldShowFirstEllipsis()" class="page-item">
+              <a
+                class="page-link"
+                href="javascript:void(0)"
+                (click)="onPageChange(0)"
+                >1</a
+              >
+            </li>
+
+            <!-- Show ellipsis if there are more pages between the start and the displayed pages -->
+            <li *ngIf="shouldShowFirstEllipsis()" class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+
+            <!-- Page numbers in the range -->
+            <li
+              class="page-item"
+              *ngFor="let page of getPagesArray(); trackBy: trackByPage"
+              [class.active]="page === currentPage + 1"
+            >
+              <a
+                class="page-link"
+                href="javascript:void(0)"
+                (click)="onPageChange(page - 1)"
+                >{{ page }}</a
+              >
+            </li>
+
+            <!-- Show ellipsis if there are more pages after the displayed pages -->
+            <li *ngIf="shouldShowLastEllipsis()" class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+
+            <!-- Show the last page button if not on the last page -->
+            <li *ngIf="shouldShowLastEllipsis()" class="page-item">
+              <a
+                class="page-link"
+                href="javascript:void(0)"
+                (click)="onPageChange(totalPages - 1)"
+                >{{ totalPages }}</a
+              >
+            </li>
+
+            <li
+              class="page-item"
+              [class.disabled]="currentPage === totalPages - 1"
+            >
+              <a
+                class="page-link"
+                href="javascript:void(0)"
+                (click)="onPageChange(currentPage + 1)"
+                aria-label="Next"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noUsers>
+    <div class="alert alert-info" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i>
+      No consultants found in the system.
+    </div>
+  </ng-template>
+</div>

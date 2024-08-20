@@ -1,0 +1,118 @@
+.action-buttons {
+  display: flex;
+  justify-content: space-between; /* Adjusts the space between the buttons */
+}
+
+.action-buttons .btn-info {
+  margin-right: 8px; /* Adjust the value as needed */
+}
+
+/* New CSS after introducing tooltip */
+
+.table-header-prominent th {
+  background-color: #007bff; /* Darker shade for more prominence */
+  color: #ffffff; /* White text for contrast */
+  font-weight: bold; /* Make the text bolder */
+  border-bottom: 2px solid #0056b3; /* Add a solid border for definition */
+}
+
+.search-input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+}
+
+.search-button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+.table-fixed th,
+.table-fixed td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.col-consultant-info {
+  width: 20%;
+}
+.col-location {
+  width: 25%;
+}
+.col-contact {
+  width: 25%;
+}
+.col-status {
+  width: 15%;
+}
+.col-actions {
+  width: 15%;
+}
+
+/* .tooltip-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+} */
+
+.text-container {
+  width: 100%; /* or max-width as per your layout */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip-content {
+  display: none;
+  position: absolute;
+  background-color: #dee8f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+}
+td:hover .tooltip-content {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .table-responsive-stack td {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .table-responsive-stack td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 6px;
+    width: 45%;
+    text-align: left;
+    font-weight: bold;
+  }
+}
+
+.form-select {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Optional: Customize the scrollbar for better visibility */
+.form-select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form-select::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.form-select::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.form-select::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

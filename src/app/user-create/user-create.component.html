@@ -1,0 +1,437 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        <i class="bi bi-person-plus-fill me-2"></i>Create Consultant
+      </h4>
+    </div>
+    <div class="card-body">
+      <!-- CSV Upload Section -->
+      <div class="csv-upload-section my-5 p-4 bg-light rounded">
+        <h5 class="mb-4 text-center">
+          <i class="bi bi-file-earmark-spreadsheet me-2"></i>Upload Consultants
+          (CSV)
+        </h5>
+        <div class="input-group">
+          <label class="input-group-text btn btn-primary" for="csvFileInput">
+            <i class="bi bi-file-earmark me-1"></i>Choose file
+          </label>
+          <input
+            type="file"
+            class="form-control"
+            id="csvFileInput"
+            (change)="selectFile($event)"
+            accept=".csv"
+            style="display: none"
+          />
+          <input
+            type="text"
+            class="form-control"
+            readonly
+            placeholder="No file chosen"
+            id="file-chosen"
+          />
+          <button (click)="upload()" class="btn btn-success" type="button">
+            <i class="bi bi-upload me-1"></i>Upload
+          </button>
+        </div>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" class="form-with-padding">
+        <div class="row g-3">
+          <!-- Personal Information -->
+          <div class="col-md-4">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              [(ngModel)]="user.firstName"
+              name="firstName"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="middleName" class="form-label">Middle Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="middleName"
+              [(ngModel)]="user.middleName"
+              name="middleName"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              [(ngModel)]="user.lastName"
+              name="lastName"
+              required
+            />
+          </div>
+
+          <!-- Location Information -->
+          <div class="col-md-4">
+            <label for="state" class="form-label">State</label>
+            <select
+              class="form-select"
+              id="state"
+              [(ngModel)]="user.state"
+              name="state"
+              required
+              (change)="onStateChange()"
+            >
+              <option value="">Select State</option>
+              <option *ngFor="let state of states" [value]="state.state">
+                {{ state.state }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="lga" class="form-label">LGA</label>
+            <select
+              class="form-select"
+              id="lga"
+              [(ngModel)]="user.lga"
+              name="lga"
+              required
+              (change)="onLgaChange()"
+              [disabled]="!user.state"
+            >
+              <option value="">Select LGA</option>
+              <option *ngFor="let lga of lgas" [value]="lga">
+                {{ lga }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="facility" class="form-label">Facility</label>
+            <select
+              class="form-select"
+              id="facility"
+              [(ngModel)]="user.facility"
+              name="facility"
+              required
+              [disabled]="!user.lga"
+            >
+              <option value="">Select Facility</option>
+              <option *ngFor="let facility of facilities" [value]="facility">
+                {{ facility }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="team" class="form-label">Team</label>
+            <input
+              type="number"
+              class="form-control"
+              id="team"
+              [(ngModel)]="user.team"
+              name="team"
+              required
+            />
+          </div>
+
+          <!-- Professional Information -->
+          <div class="col-md-4">
+            <label for="designation" class="form-label">Designation</label>
+            <select
+              class="form-select"
+              id="designation"
+              [(ngModel)]="user.designation"
+              name="designation"
+              required
+            >
+              <option value="E-recorder">E-recorder</option>
+              <option value="Facility E-recorder">Facility E-recorder</option>
+              <option value="Manual Recorder">Manual Recorder</option>
+              <option value="Mobilizer">Mobilizer</option>
+              <option value="Vaccinator">Vaccinator</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="qualification" class="form-label">Qualification</label>
+            <input
+              type="text"
+              class="form-control"
+              id="qualification"
+              [(ngModel)]="user.qualification"
+              name="qualification"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="sex" class="form-label">Sex</label>
+            <select
+              class="form-select"
+              id="sex"
+              [(ngModel)]="user.sex"
+              name="sex"
+              required
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="col-md-4">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumber"
+              [(ngModel)]="user.phoneNumber"
+              name="phoneNumber"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="internetPhoneNumber" class="form-label"
+              >Internet Phone Number</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="internetPhoneNumber"
+              [(ngModel)]="user.internetPhoneNumber"
+              name="internetPhoneNumber"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="emailAddress" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailAddress"
+              [(ngModel)]="user.emailAddress"
+              name="emailAddress"
+            />
+          </div>
+
+          <!-- Additional Information -->
+          <div class="col-12">
+            <label for="homeAddress" class="form-label">Home Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="homeAddress"
+              [(ngModel)]="user.homeAddress"
+              name="homeAddress"
+            />
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="col-md-4">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="newIntake"
+                [(ngModel)]="user.newIntake"
+                name="newIntake"
+              />
+              <label class="form-check-label" for="newIntake">New Intake</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="previousExperience"
+                [(ngModel)]="user.previousExperience"
+                name="previousExperience"
+              />
+              <label class="form-check-label" for="previousExperience"
+                >Previous Experience</label
+              >
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="governmentEmployee"
+                [(ngModel)]="user.governmentEmployee"
+                name="governmentEmployee"
+              />
+              <label class="form-check-label" for="governmentEmployee"
+                >Government Employee</label
+              >
+            </div>
+          </div>
+
+          <!-- Bank Information -->
+          <div class="col-md-4">
+            <label for="accountName" class="form-label">Account Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="accountName"
+              [(ngModel)]="user.accountName"
+              name="accountName"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="bank" class="form-label">Bank</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bank"
+              [(ngModel)]="user.bank"
+              name="bank"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="accountNumber" class="form-label">Account Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="accountNumber"
+              [(ngModel)]="user.accountNumber"
+              name="accountNumber"
+            />
+          </div>
+
+          <!-- Identification -->
+          <div class="col-md-4">
+            <label for="teamUsername" class="form-label">Team Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="teamUsername"
+              [(ngModel)]="user.teamUsername"
+              name="teamUsername"
+              required
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="meansOfIdentification" class="form-label"
+              >Means of Identification</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="meansOfIdentification"
+              [(ngModel)]="user.meansOfIdentification"
+              name="meansOfIdentification"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="idNumber" class="form-label">ID Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="idNumber"
+              [(ngModel)]="user.idNumber"
+              name="idNumber"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="sortCode" class="form-label">Sort Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sortCode"
+              [(ngModel)]="user.sortCode"
+              name="sortCode"
+            />
+          </div>
+
+          <!-- Status -->
+          <div class="col-md-4">
+            <label for="status" class="form-label">Status</label>
+            <select
+              class="form-select"
+              id="status"
+              [(ngModel)]="user.status"
+              name="status"
+              required
+            >
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-circle me-2"></i>Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- Warning Modal -->
+      <div class="modal fade" #warningModal tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Warning</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Possible duplicate detected. Do you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="proceedAfterWarning()"
+              >
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Modal -->
+      <div class="modal fade" #errorModal tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Error</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- Error message will be inserted here dynamically -->
+              <p #errorMessage></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

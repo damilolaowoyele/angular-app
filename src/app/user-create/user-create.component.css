@@ -1,0 +1,34 @@
+.csv-upload-section {
+  border: 1.3px solid #007bff;
+  transition: all 0.3s ease;
+}
+
+.csv-upload-section:hover {
+  border-color: #0056b3;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.csv-upload-section h5 {
+  color: #007bff;
+  padding: 10px;
+}
+
+.form-with-padding {
+  padding-bottom: 60px; /* Adjust the value as needed */
+}
+
+.input-group {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.btn-primary,
+.btn-success {
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}

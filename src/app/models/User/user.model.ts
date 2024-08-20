@@ -1,0 +1,34 @@
+export class User {
+  id!: string;
+  state!: string;
+  cluster!: string;
+  lga!: string;
+  team!: number;
+  teamType!: string;
+  facility!: string;
+  teamUsername!: string;
+  password!: string;
+  firstName!: string;
+  middleName?: string;
+  lastName!: string;
+  sex!: 'Male' | 'Female';
+  designation!: string;
+  newIntake!: boolean;
+  previousExperience!: boolean;
+  qualification!: string;
+  phoneNumber!: string;
+  internetPhoneNumber!: string;
+  governmentEmployee!: boolean;
+  emailAddress?: string;
+  homeAddress?: string;
+  accountName?: string;
+  bank?: string;
+  accountNumber?: string;
+  meansOfIdentification?: string;
+  idNumber?: string;
+  sortCode?: string;
+  status!: 'Active' | 'Inactive';
+  suspectedDuplicate!: boolean;
+  createdDate?: string;
+  lastModifiedDate?: string;
+}

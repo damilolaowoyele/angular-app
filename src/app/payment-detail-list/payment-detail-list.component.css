@@ -1,0 +1,29 @@
+.table-header-prominent th {
+  background-color: #007bff; /* Darker shade for more prominence */
+  color: #ffffff; /* White text for contrast */
+  font-weight: bold; /* Make the text bolder */
+  border-bottom: 2px solid #0056b3; /* Add a solid border for definition */
+}
+
+.form-select {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Optional: Customize the scrollbar for better visibility */
+.form-select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form-select::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.form-select::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.form-select::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
