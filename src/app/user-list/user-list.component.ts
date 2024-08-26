@@ -154,12 +154,9 @@ export class UserListComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          console.log(response.totalPages); // remove later; just for testing
           this.users = response.content;
           this.totalPages = response.page.totalPages;
           this.totalElements = response.page.totalElements;
-          console.log('Total Pages:', this.totalPages); // remove later; just for testing
-          console.log('Total Elements:', this.totalElements); // remove later; just for testing
           this.cdr.detectChanges();
         },
         error: (error) => {

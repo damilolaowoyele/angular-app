@@ -8,13 +8,12 @@ import {
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../models/User/user.model';
-import { FileUploadService } from '../services/file-upload.service'; // Import the FileUploadService
-import { StatesLgasFacilitiesService } from '../services/states-lgas-facilities.service'; // Import the StatesLgasFacilitiesService
+import { FileUploadService } from '../services/file-upload.service';
+import { StatesLgasFacilitiesService } from '../services/states-lgas-facilities.service';
 import {
   State,
   LgaFacilitiesSet,
-} from '../services/states-lgas-facilities.service'; // Import the State and LgaFacilitiesSet interfaces
-
+} from '../services/states-lgas-facilities.service';
 declare var bootstrap: any;
 
 @Component({
@@ -115,15 +114,11 @@ export class UserCreateComponent implements OnInit, AfterViewInit {
   }
 
   proceedAfterWarning() {
-    // const modal = new bootstrap.Modal(this.warningModal.nativeElement);
-    // modal.hide(); // Hide the modal
     this.forceSaveModal.hide();
     this.saveUser(true);
   }
 
   openWarningModal() {
-    // const modal = new bootstrap.Modal(this.warningModal.nativeElement);
-    // modal.show();
     this.forceSaveModal.show();
   }
 
@@ -153,11 +148,6 @@ export class UserCreateComponent implements OnInit, AfterViewInit {
       this.openErrorModal('Last name is required');
       return false;
     }
-
-    // if (!this.user.emailAddress) {
-    //   this.openErrorModal('Email is required');
-    //   return false;
-    // }
 
     if (!this.user.state) {
       this.openErrorModal('State is required');
