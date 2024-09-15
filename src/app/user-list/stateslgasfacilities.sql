@@ -65,6 +65,7 @@ INSERT INTO states_lgas_facilities (state, lgas_facilities) VALUES
     {"lga": "Boki", "facilities": ["PHC Bashua", "MPHC Nsadop", "PHC Ntamante"]},
     {"lga": "Calabar Municipal", "facilities": ["Ikot Nkebre Health Center", "Nasarawa Health Center", "Akai Effa Health Center"]},
     {"lga": "Etung", "facilities": ["Mfum Health Post", "PHC Etomi", "Health Post Ekimaya"]},
+    {"lga": "Calabar South", "facilities": ["Ayatmo Health Post", "Edgerli Health Post", "Eyamba Health Post"]},
     {"lga": "Ikom", "facilities": ["Health Post Nkaransi I", "Primary Health Center Agbaragba", "Health Center Nde Afi"]},
     {"lga": "Obanliku", "facilities": ["PHC Utanga", "Bebuekayang Health Post", "PHC Utuhu"]},
     {"lga": "Obubra", "facilities": ["Ofumbongha Health Centre", "Edondon Health Centre", "Ofoduhsa Primary Health Centre"]},
